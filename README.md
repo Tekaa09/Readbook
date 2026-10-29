@@ -1,5 +1,66 @@
 # Redbook
 
+## English
+
+Redbook is an SAT Reading & Writing practice app with a Bluebook-style interface: a timer, mark for review, passage highlighting, and a score report after you submit.
+It runs **offline**: no Internet connection is needed and nothing is sent anywhere.
+
+### Download
+
+Open **Releases** (on the right side of this page) and download one of these files:
+
+| File | For | Requirements |
+|---|---|---|
+| `Redbook-windows.zip` | Windows | Nothing. Unzip it and open `Redbook.exe`. |
+| `Redbook-jar.zip` | Windows, macOS, Linux | Java 8 or later. Open `Redbook.bat` (Windows) or run `java -jar RedbookUser.jar`. |
+
+Releases contain the app only, without test questions (see [Test data](#test-data)).
+
+### Using the app
+
+1. The first time you open the app, click **No account? Sign up** to create an account (passwords need at least 8 characters).
+2. Sign in, choose a module and click **START PRACTICE**.
+3. Submit when you finish to see your score and the answers.
+4. **ERROR LOG**: when you submit, questions you got wrong or left blank are recorded automatically.
+   Open it to review each question with the correct answer and the answer you chose, tag the reason (vocabulary, grammar, misreading...) and add notes.
+   When you later answer that question correctly, it moves to **Fixed**.
+5. **VOCAB**: flashcards with words from the tests (Vietnamese and English meanings, with examples) and words you add yourself.
+   Space flips the card, 1 = not yet, 2 = I know it. Words you know come back at longer intervals
+   (1, 3, 7, then 21 days); words you don't know come back right away.
+
+Accounts, the error log and vocabulary progress are stored only on your computer (`%APPDATA%\Redbook`). Passwords are hashed with PBKDF2 and never stored in readable form.
+
+### Test data
+
+This repository contains source code only. Tests and questions are **not** included in the repository or in releases, because the test content is copyrighted by its publishers.
+
+To use the app with your own tests, create them in the **ADMIN PANEL** of the admin edition (tests are stored in MySQL), then build the user edition (see below).
+The tests are packaged inside the app. The user edition cannot edit tests or questions.
+
+### For developers
+
+You need JDK 17 (the build runs on Java 8) and a MySQL database named `redbook` (tables `users`, `roles`, `verbalmodules`, `questions`...).
+
+```
+src/                 Java source (Swing; MySQL Connector/J in lib/ is used by the admin edition only)
+config/              settings (*.example files are templates), icon, guide shipped with releases
+database_setup.sql   sign-in procedure with password hashing for the admin edition
+build.bat            build and packaging
+```
+
+1. Run `database_setup.sql` as root. It also creates the `vocab` table
+   (word, part of speech, English meaning, Vietnamese meaning, example, question that uses the word) so admins can add vocabulary.
+2. Copy `config/admin.properties.example` to `config/admin.properties` and fill in your MySQL password.
+   This file holds the password, so it is excluded from git.
+3. Start MySQL and run `build.bat`:
+   - `app.jar`: the admin edition, which signs in with accounts stored in MySQL. Accounts with role 2 get an **ADMIN PANEL** for creating and editing tests and questions.
+   - `dist/RedbookUser/RedbookUser.jar`: the offline user edition. At build time, tests and questions are exported from MySQL
+     (`DatasetExporter`) and packaged inside it. This edition has no editing features and never connects to a database.
+
+   Run `build.bat release` to also create `release/Redbook-windows.zip` (with Java included) and `release/Redbook-jar.zip`.
+
+## Tiếng Việt
+
 App luyện đề SAT phần Reading & Writing, giao diện giống Bluebook: có đồng hồ, đánh dấu câu, tô sáng đoạn văn và xem kết quả sau khi nộp bài.
 App chạy **offline**: không cần Internet, không gửi dữ liệu đi đâu.
 
