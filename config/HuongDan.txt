@@ -1,0 +1,16 @@
+REDBOOK – BẢN NGƯỜI DÙNG (OFFLINE)
+==================================
+Bản này chỉ để làm bài, không cần Internet. Không có chức năng tạo/sửa đề hay câu hỏi.
+
+1. Mở app:
+   - Bản Redbook-windows.zip: giải nén rồi mở Redbook.exe (không cần cài gì).
+   - Bản Redbook-jar.zip: cần Java 8 trở lên (https://www.java.com/download/), mở Redbook.bat.
+2. Lần đầu: bấm "No account? Sign up" để tạo tài khoản (mật khẩu ít nhất 8 ký tự).
+3. Đăng nhập, chọn module rồi bấm START PRACTICE.
+4. ERROR LOG: các câu làm sai được tự ghi lại. Mở ra để xem lại câu và đáp án, ghi lý do sai và ghi chú.
+   Lần sau làm đúng, câu tự chuyển sang Fixed.
+5. VOCAB: học từ vựng bằng thẻ (Space = lật thẻ, 1 = chưa nhớ, 2 = đã nhớ). Có sẵn từ trong đề,
+   bạn thêm được từ riêng ở tab Word list.
+
+Tài khoản, sổ lỗi sai và tiến độ học từ chỉ lưu trên máy này (thư mục %APPDATA%\Redbook), mật khẩu được mã hóa, không gửi đi đâu.
+Muốn có đề mới thì tải bản app mới.

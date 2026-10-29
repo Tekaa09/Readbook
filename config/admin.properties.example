@@ -1,0 +1,6 @@
+# Admin app (app.jar): account that can edit modules and questions. Keep this file private.
+db.host=localhost
+db.port=3306
+db.name=redbook
+db.user=root
+db.password=YOUR_ADMIN_PASSWORD
